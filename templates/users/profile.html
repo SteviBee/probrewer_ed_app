@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+
+    <img src="{{ user.image_url }}" alt="User Profile Picture" id="user-hero">
+    <h1>User: {{ user.username }}</h1>
+    <h2>Answers correct: {{ user.total_correct_answers }}</h2>
+    <div class="ml-auto">
+        {% if g.user.id == user.id %}
+        <a href="/users/edit" class="btn btn-outline-secondary">Edit Profile</a>
+        <form method="POST" action="/users/delete" class="form-inline">
+          <button class="btn btn-outline-danger ml-2">Delete Profile</button>
+        </form>
+        {% endif %}
+
+{% endblock %}

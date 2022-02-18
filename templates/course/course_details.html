@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block content %}
+
+    <h1>{{ course.title }}</h1>
+    <div class="container">
+        <div id="submodule" class="row mb-4">
+            {% for item in sub %}
+                <div class="col">{{ item }}</div>
+            {% endfor %}   
+            <div class="col bg-info">example Highlight</div>
+        </div>
+        <div class="row">
+            <div id="graph" class="col bg-dark">
+                <!-- TODO - add API calls that are relivent. Maybe go back and add to question's schema -->
+                <!-- TODO look at designating single or muiltiple answer -->
+                <p class="align-middle text-light">Image here</p>
+            </div>
+            <div class="col-1"></div>
+            <div class="col">
+                <div id="sentence" class="row" >{{ question.question }}</div>
+                <div id="sentence" class="row d-none" >Sentence</div>
+                <form method="POST" action="/course"> 
+                    {% for item in pq %}
+                        <div class="form-check bg-light answers">
+                            <input class="form-check-input" type="checkbox" value={{item.id}} id=input-item name={{item.id}}>
+                            <label class="form-check-label" for="{{item.id}}">{{ item.possible_ans }}</label>
+                            <!-- <li class="list-group-item-action" id="{{item.id}}">{{ item.possible_ans }}</li> -->
+                        </div>
+                    {% endfor %}                         
+
+                    <div class="input-group">
+                    <input type="text" class="form-control d-none">
+                    </div>     
+
+                    <button class="btn btn-success btn-md">Submit</button>
+                </form>
+            </div>
+        </div>
+        <div class="row justify-content-end mt-5">
+            <button class="btn btn-success ">status</button>
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+  <div class="row">
+    <p>Hello world</p>
+    <p>Question: {{ question.question, question.id}}</p>
+    <p>Answer: {{ question.answer_multi_choice }}</p>
+    <p>Answer: {{ question.answer_text }}</p>
+    <p>User: {{ user.username, user.password, user.total_correct_answers }}</p>
+    <p>Course: {{ c.title, c.description }}</p>
+    <p>sub: {{ sub.course_id, sub.question_id, sub.name }}</p>
+    <p>possible Q straight up: {{ lst.possible_ans }}</p>
+
+
+    <h2>Now test relationships</h2>
+    <p>Through course -> sub -> question: {{ c.questions[1].question }}</p>
+    <p>Through question -> sub -> course: {{ question.course[0].title }}</p>
+    <p>possible Q question -> possilbe: {{ question.list_questions[1].possible_ans }}</p>
+
+  </div>
+{% endblock %}
