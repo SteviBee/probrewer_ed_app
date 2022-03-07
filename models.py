@@ -30,10 +30,21 @@ class Question(db.Model):
         unique=False,
     )
 
+    resource = db.Column(
+        db.Text,
+        nullable=True,
+        unique=False,
+    )
+
     answer_text = db.Column(
         db.Text,
         nullable=True,
         unique=False,
+    )
+
+    api_call = db.Column(
+        db.PickleType,
+        nullable=True,
     )
 
     list_questions = db.relationship('ListOfPossibleAns', backref="question")
@@ -98,6 +109,16 @@ class User(db.Model):
     )    
 
     total_correct_answers = db.Column(
+        db.Integer,
+        nullable=True,
+    )
+
+    current_course = db.Column(
+        db.Integer,
+        nullable=True,
+    )
+    
+    current_question = db.Column(
         db.Integer,
         nullable=True,
     )

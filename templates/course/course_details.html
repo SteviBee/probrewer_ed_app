@@ -7,19 +7,28 @@
             {% for item in sub %}
                 <div class="col">{{ item }}</div>
             {% endfor %}   
-            <div class="col bg-info">example Highlight</div>
+            <!-- <div class="col bg-info">example Highlight</div> -->
         </div>
         <div class="row">
-            <div id="graph" class="col bg-dark">
-                <!-- TODO - add API calls that are relivent. Maybe go back and add to question's schema -->
-                <!-- TODO look at designating single or muiltiple answer -->
-                <p class="align-middle text-light">Image here</p>
+            <div id="graph" class="col bg-light">
+
+                <div class="embed-responsive embed-responsive-16by9" style="height: 500px; width: 500px">
+                    {% if question.answer_text %}
+                    <iframe src="{{ question.answer_text }}" class="embed-responsive-item" allowfullscreen frameborder="0" style="height: 500px; width: 500px"></iframe>
+                    {% else %}
+                    <iframe id="api-call" style="height: 500px; width: 500px" class="embed-responsive-item" src="{{ chart.url }}" allowfullscreen></iframe>
+                    {% endif %}
+                </div>
+                
             </div>
             <div class="col-1"></div>
             <div class="col">
+                {% if question.resource %}
+                <div class="row" id=link><a class="link-primary" target="_blank" href="https://crispmalt.com/news/the-crisp-guide-to-mashing/">Resource for question</a></div>
+                {% endif %}
                 <div id="sentence" class="row" >{{ question.question }}</div>
                 <div id="sentence" class="row d-none" >Sentence</div>
-                <form method="POST" action="/course"> 
+                <form method="POST" action="/course/{{course.id}}/question/{{question.id}}"> 
                     {% for item in pq %}
                         <div class="form-check bg-light answers">
                             <input class="form-check-input" type="checkbox" value={{item.id}} id=input-item name={{item.id}}>
@@ -33,12 +42,14 @@
                     </div>     
 
                     <button class="btn btn-success btn-md">Submit</button>
+                    <button class="btn btn-info btn-md"><a href="/course/{{ course.id }}/question/1">Reset</a></button>
                 </form>
             </div>
         </div>
-        <div class="row justify-content-end mt-5">
+        <!-- TODO: if time add some status bar -->
+        <!-- <div class="row justify-content-end mt-5">
             <button class="btn btn-success ">status</button>
-        </div>
+        </div> -->
     </div>
 
 {% endblock %}

@@ -1,20 +1,55 @@
 {% extends 'base.html' %}
 {% block content %}
   <div class="row">
-    <p>Hello world</p>
-    <p>Question: {{ question.question, question.id}}</p>
-    <p>Answer: {{ question.answer_multi_choice }}</p>
-    <p>Answer: {{ question.answer_text }}</p>
-    <p>User: {{ user.username, user.password, user.total_correct_answers }}</p>
-    <p>Course: {{ c.title, c.description }}</p>
-    <p>sub: {{ sub.course_id, sub.question_id, sub.name }}</p>
-    <p>possible Q straight up: {{ lst.possible_ans }}</p>
-
-
-    <h2>Now test relationships</h2>
-    <p>Through course -> sub -> question: {{ c.questions[1].question }}</p>
-    <p>Through question -> sub -> course: {{ question.course[0].title }}</p>
-    <p>possible Q question -> possilbe: {{ question.list_questions[1].possible_ans }}</p>
-
+    <div class="col">
+      <h1>Professional Brewer Educational Courses</h1>
+      <h5 class="p-2">Teaching the critical brewing skills to propel you wherever you are going</h3>
+        <form action="/signup"><button class="btn btn-success btn-md">Start Now</button></form>
+        
+    </div>
+    <div class="col">
+      <img src="/static/images/tanks.jpeg" alt="Tanks" class="img-fluid">
+    </div>
   </div>
+
+  <div class="row p-5 m-2"> 
+    <div class="col">
+      "Professional Brewers educaitonal courses helped me learn how to take homebrewing to the next level" - Bob Brewer
+    </div>
+    <div class="col">
+      "The courses were challenging but helped me develop the technical skills I needed to go into brewing" - Jane Doe
+    </div>
+    <div class="col">
+      "The masters level courses were just what I needed to help my brewery propel" - Jack Frost
+    </div>
+  </div>
+  <div class="row">
+    <h1 class="p-3">Courses</h1>
+    <div class="col d-flex justify-content-center">
+      <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src="/static/images/intro.png" alt="Intro" style="height: 216px; width: 286">
+        <div class="card-body">
+          <h5 class="card-title">Intro Course</h5>
+          <p class="card-text">Great overview of beer making process for anyone from novice to masters.</p>
+          <a href="/course/1/question/1" class="btn btn-primary">Start</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col d-flex justify-content-center">
+      <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src="/static/images/masters.jpeg" alt="Masters Course">
+        <div class="card-body">
+          <h5 class="card-title">Masters Course</h5>
+          <p class="card-text">A brewing science course for brewing professionals looking to further their knowledge.</p>
+          <a href="/course/2/question/6" class="btn btn-primary">Start</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- <p><a href="/course/1/question/1">Intro Course</a></p>
+    <p><a href="/course/2/question/6">Masters Course</a></p> -->
+
+
+
 {% endblock %}
