@@ -11,9 +11,6 @@ from models import db, connect_db, Course, Question, SubModule, User, ListOfPoss
 from forms import UserAddForm, LoginForm, UserEditForm
 
 CURR_USER_KEY = "curr_user"
-# CURR_QUESTION_KEY = "curr_question"
-# CURR_COURSE_KEY = "curr_course"
-# CURR_LIST_QUESTIONS = []
 
 app = Flask(__name__)
 
@@ -166,134 +163,7 @@ def index():
 
     return render_template('index.html', question=question, user=user, c=course, sub=sub, lst=lst)
 
-# HERHERHEHRHEHREH - 2/17 - NExt is to show next question or maybe redirect, then corrispond
-# API call and then, counter / Total correct vs attempted ?, then maybe look at making
-# a query-int to pick which course
 
-
-# TODO Take this out and the front end button if i can't get it to work 
-# @app.route("/reset/<int:course_id>")
-# def reset_course(course_id):
-#     """Reseting global course list"""
-    
-#     course = Course.query.get_or_404(course_id)
-#     CURR_LIST_QUESTIONS.clear()
-#     for item in course.questions:
-#         CURR_LIST_QUESTIONS.append(item)
-#     # print("RESET NOW_______________________", CURR_LIST_QUESTIONS)
-
-#     return redirect(f"/course/{course_id}")
-
-
-# @app.route('/course/<int:course_id>', methods=["GET", "POST"])
-# def show_course(course_id):
-#     """Populated selected course with first question and controls submitions"""
-#     # populate course - Next is to go through the course to populate questions tehrefor 
-#     # I can eventually send the course ID to this page to populate 
-
-#     # If no user logged in then get the first intro course - 2/20 put course under if
-#     # if not g.user:
-#         # course = Course.query.first()
-#     course = Course.query.get_or_404(course_id)
-#         # question = course.questions[0].question
-#         # question = Question.query.first()
-    
-#     # # PART OF SESSION / TRACKER ----------
-#     # # If user logged in pull their question and query it
-#     # if CURR_QUESTION_KEY in session: 
-#     #     # print("session_______________________", session[CURR_COURSE_KEY], session[CURR_QUESTION_KEY])
-#     #     # If they have a key in the session then set course and question to that
-#     #     course = Course.query.get_or_404(session[CURR_COURSE_KEY])
-#     #     question = Question.query.get_or_404(session[CURR_QUESTION_KEY])
-#     #     # print("session 2 ______________________", course, question)
-
-#     #     # Manually resetting global question list
-#     #     for item in course.questions:
-#     #         CURR_LIST_QUESTIONS.append(item)
-
-#     #     # Index to correct question:
-#     if g.user:
-#         user = User.query.get_or_404(g.user.id)
-
-#     else:
-#         user="empty"
-
-#     # Creating list of questions for the course
-#     if len(CURR_LIST_QUESTIONS) == 0:
-#         # print("LESS THAT ZERO_______________________", CURR_LIST_QUESTIONS)
-#         for item in course.questions:
-#             CURR_LIST_QUESTIONS.append(item)
-    
-#     # Grapping the next question if none then issue
-#     question = CURR_LIST_QUESTIONS[0]
-
-#     # #   DELET EX:
-#     # if CURR_USER_KEY in session:
-#     #     del session[CURR_USER_KEY]
-
-
-#     # If the current question is set then don't initialize one otherwise start one!
-#     # if CURR_QUESTION_KEY in session:
-#     #     return
-#     # else:
-#     #     session[CURR_QUESTION_KEY] = questions[0]
-    
-#     # question = session[CURR_QUESTION_KEY]
-
-#     all_subs = SubModule.query.filter_by(course_id=course.id).all()
-#     lst= ListOfPossibleAns.query.filter_by(question_id=question.id).all()
-
-#     # Creating list of submodules, filters out repeats
-#     submods = []
-#     for item in all_subs:
-#         if item.name in submods:
-#             continue
-#         else:
-#             submods.append(item.name)
-
-#     # Creating list of possible answers
-#     possible = []
-#     for item in lst:
-#         possible.append(item)
-    
-#     # Checking if answer is correct or not
-#     if request.method == 'POST':
-
-#         if request.form.get(f"{question.answer_multi_choice}") == None:
-#             flash("Incorrect", "info")
-#             return redirect(f"/course/{course_id}")
-
-#         elif int(request.form.get(f"{question.answer_multi_choice}")) == question.answer_multi_choice:
-#             flash("Correct!", "success")
-            
-#             # Once correct move to next question in the list:
-#             CURR_LIST_QUESTIONS.pop(0)
-#             question = CURR_LIST_QUESTIONS[0]
-#             session[CURR_QUESTION_KEY] = question.id
-#             session[CURR_COURSE_KEY] = course.id
-
-#             if g.user:
-#                 print("this worked1(***************** user logged in")
-#                 user = User.query.get_or_404(g.user.id)
-#                 user.current_course = course.id
-#                 user.current_question = question.id
-
-#                 # # TODO - delet this?
-#                 # CURR_LIST_QUESTIONS.clear()
-
-#                 # db.session.add()
-#                 db.session.commit()
-     
-#             return redirect(f"/course/{course_id}")
-
-#         else:
-#             # TODO - validate if I want this or not
-#             flash("Error", "danger")
-#             return redirect("/")
-
-#     return render_template('course/course_details.html', question=question, course=course, sub=submods, pq=possible, user=user)
-
-# TRY TWO OF COURSE
 @app.route('/course/<int:course_id>/question/<int:question_id>', methods=["GET", "POST"])
 def show_course(course_id, question_id):
     """Populated selected course with first question and controls submitions"""
@@ -385,7 +255,6 @@ def show_course(course_id, question_id):
             return redirect(f"/course/{course_id}/question/{next_q}")
 
         else:
-            # TODO - validate if I want this or not
             flash("Error", "danger")
             return redirect("/")
 
@@ -411,4 +280,4 @@ def page_not_found(e):
 
     return render_template('404.html'), 404
 
-# ****************************  COURSE & API ROUTES:  ****************************
+

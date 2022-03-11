@@ -49,7 +49,6 @@ class Question(db.Model):
 
     list_questions = db.relationship('ListOfPossibleAns', backref="question")
 
-    # TODO - Check if i should delete this
     @classmethod
     def check_answer(cls, answer, selected):
         """checks if the selected question's answer matches the DB answer and returns true"""
@@ -123,7 +122,6 @@ class User(db.Model):
         nullable=True,
     )
 
-    # use to record the users current spot so they can resume - TODO - Test this
     current_question_id = db.Column(
         db.Integer,
         db.ForeignKey('questions.id', ondelete='CASCADE'),
