@@ -1,6 +1,5 @@
 """Seed database with sample data"""
-import resource
-from turtle import title
+
 from app import db
 from models import Course, Question, SubModule, User, ListOfPossibleAns
 
