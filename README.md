@@ -25,6 +25,6 @@
 
 6. Stack:
     - **Front End**: - Javascript, HTML, CSS, Jinja, Bootstrap, sessions
-    - **Back End** – Flask, Python, Sqlalchemy, Postgres, WTForms, BCrypt 
+    - **Back End** – Flask, Python, Sqlalchemy, Postgresql, WTForms, BCrypt 
 
 
